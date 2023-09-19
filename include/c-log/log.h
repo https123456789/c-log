@@ -4,7 +4,12 @@
 #ifndef _C_LOG_LOG_H_
 #define _C_LOG_LOG_H_
 
-#define __FILENAME__ (strrchr(__FILE__, '/') ? strrchr(__FILE__, '/') + 1 : __FILE__)
+#if defined(__WIN32) || defined(__WIN64)
+    #define _PATH_SEPARATOR '\\'
+#else
+    #define _PATH_SEPARATOR '/'
+#endif
+#define __FILENAME__ (strrchr(__FILE__, _PATH_SEPARATOR) ? strrchr(__FILE__, _PATH_SEPARATOR) + 1 : __FILE__)
 
 #define log_trace(format, ...) log_log(LOG_TRACE, NULL, 0, format, ##__VA_ARGS__)
 #define log_debug(format, ...) log_log(LOG_DEBUG, NULL, 0, format, ##__VA_ARGS__)
