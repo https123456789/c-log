@@ -24,13 +24,24 @@ static const char *log_colors[7] = {
 
 enum log_level LOG_LEVEL = LOG_INFO;
 
-void log_log(enum log_level level, const char *format, ...) {
+void log_log(
+    enum log_level level,
+    const char *file,
+    int line,
+    const char *format,
+    ...
+) {
     if (level < LOG_LEVEL) return;
+
+    fprintf(stderr, "%s%s  \x1b[0m", log_colors[level], log_names[level]);
+    
+    if (file != NULL) {
+        fprintf(stderr, "\x1b[90m%s:%d\x1b[0m ", file, line);
+    }
 
     va_list args;
     va_start(args, format);
 
-    fprintf(stderr, "%s%s  \x1b[0m", log_colors[level], log_names[level]);
     vfprintf(stderr, format, args);
     fprintf(stderr, "\n");
 
