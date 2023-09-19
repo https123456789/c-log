@@ -12,6 +12,7 @@ You can log messages using the `log_level` functions (i.e. `log_info` or `log_wa
 int main() {
     log_info("This is an example");
     log_note("You should check out the log_set_level function: %p", (void*) log_set_level);
+    log_inote("Info log messages are a thing too!");
     return EXIT_SUCCESS;
 }
 ```
@@ -27,6 +28,10 @@ The following log levels are supported:
 - `warn`
 - `error`
 - `fatal`
+
+## Info Logs
+
+You can also use the "i" variant for each log level (i.e. `log_trace` can be `log_itrace`).
 
 ## Minimum Log Level
 
